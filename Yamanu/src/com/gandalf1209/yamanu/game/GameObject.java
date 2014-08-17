@@ -1,5 +1,7 @@
 package com.gandalf1209.yamanu.game;
 
+import java.awt.Image;
+
 public class GameObject {
 
 	private int x;
@@ -9,6 +11,7 @@ public class GameObject {
 	private boolean canCollide;
 	private int friction;
 	private boolean smart;
+	private Image img;
 	
 	public GameObject(int x, int y, int w, int h, boolean canCollide, int friction, boolean smart) {
 		this.x = x;
@@ -74,6 +77,14 @@ public class GameObject {
 
 	public void setSmart(boolean smart) {
 		this.smart = smart;
+	}
+	
+	public void setImage(Image img) {
+		this.img = img;
+	}
+	
+	public Image getImage() {
+		return this.img;
 	}
 	
 }
