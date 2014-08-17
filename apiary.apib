@@ -1,0 +1,503 @@
+FORMAT: 1A
+HOST: http://www.yamanu-game-engine.zzl.org
+
+# Yamanu Ludum Dare Edition
+Yamanu 1.1 is a *Java 2D Game Engine.* Classes, methods, and uses are listed below. Classes are in *alphabetical* order.
+
+# Group Debug
+All methods are from **Debug.class**
+
+## pst(Exception e)
+
+Used as an easier method of printing a stack trace for an exception
+
+    catch (Exception e) {
+        Debug.pst(e);
+    }
+
+## out(String out, Class<?> c)
+Used to print a message with debug information along with it <br/>
+Non-static context:
+
+    Debug.out("Age: " + age, this.getClass());
+    
+Static context:
+
+    Debug.out("Age: " + age, ClassName.class.getClass());
+    
+## getMethodCallLine()
+Used to find the line number of a method. The method is the same method that this method is in
+<br/> Returns Integer
+
+    Debug.getMethodCallLine();
+    
+# Group FileLoader
+All methods are from **FileLoader.class**
+<br/> FileLoader has to be **initialized** before use. **fl** is the variable used
+
+## load(String url)
+Used to initialize a File variable a tad easier.
+<br/> Returns File
+    
+    File file = fl.load("File.txt");
+    
+## loadText(String url)
+Used to obtain the contents of a file containing text
+<br/> Returns String
+
+    String fileContents = fl.loadText("File.txt);
+    
+## setDefaultLoadingDirectory(String path)
+Used to set the default directory for loading files with these methods
+
+    fl.setDefaultLoadingDirectory("/files/");
+    
+# Group GameHandler
+All methods are from **GameHandler.class**
+<br/> GameHandler has to be **initialized** before used. **gh** is the variable used
+
+## initTimer(int time, ActionListener al)
+Used to initialize the Java Swing Timer.
+<br/> Time is the time in milliseconds between updates
+<br/> ActionListener is an initialized class that implements ActionListener
+
+    Game game = new Game();
+    gh.initTimer(40, game);
+    
+## pauseGame()
+Pauses the game and any background music playing
+
+    gh.pauseGame();
+    
+## resumeGame()
+Resumes the game and any background music playing
+
+    gh.resumeGame();
+    
+#Group GraphicsHandler
+All methods are from **GraphicsHandler.class**
+<br/> GraphicsHandler has to be **initialized** before used. **gh** is the variable used
+<br/> GraphicsHandler is also known as the Graphics Engine in Yamanu 1.0
+
+## GraphicsHandler(Graphics g, Component c)
+This is how the Graphics Engine should be initialized
+<br/> frame is a Window from Yamanu
+<br/> paintComponent in this case is used in the class Game that extends JComponent
+
+    public static Game game = new Game();
+    public static Window frame = new Window("Game", 800, 600, null, Window.EXIT_ON_CLOSE, game);
+
+    public void paintComponent(Graphics g) {
+        GraphicsHandler gh = new GraphicsHandler(g, frame);
+    }
+    
+Becuase Window extends Component, it is able to be used in this case.
+
+## setBGColor(Color color)
+Sets the window's background color to specified color. Should be used before drawing anything else
+
+    gh.setBGColor(new Color(121, 121, 121));
+    
+## setBGImage(Image img)
+Sets the window's background image. Should be used before drawing anything else
+
+    gh.setBGImage(bgimage);
+    
+## addLight(int x, int y, int intense)
+Adds a light to the window. This does not create shadows, those have to be amnually added
+<br/> Intensity is the size of the light
+
+    gh.addLight(100, 100, 50);
+    
+## addImage(Image img, int x, int y, int w, int h)
+Adds an image to the window.
+<br/> Image is the image used. X - X Position, Y - Y Position, W - Width, H - Height
+
+    gh.addImage(cowImage, 150, 150, 100, 100);
+    
+## addImageWithShadow(Image img, int x, int y, int w, int h, int shadowX, int shadowY, int shadowW, int shadowY)
+Adds an image with shadow parameters to add a shadow along with the image!
+<br/> For custom shadow:
+
+    gh.addImageWithShadow(cowImage, 150, 150, 100, 100, 150, 150, 90, 90);
+    
+For smart shadow:
+
+    gh.addImageWithShadow(cowImage, 150, 150, 100, 100, gh.SMART_SHADOW, 0, 0, 0);
+    
+## addCustomPopup(String[] message, Color messageColor, Color fill, Color border, boolean whenShown, boolean pauseOnShow, int x, int y, int w, int h)
+Adds a custom popup image, instead of using JOptionPane.
+<br/> All of the parameters are pretty self explanitory except for a couple
+<br/> The message argument is an array. Every new part of the array is a new line in the popup.
+<br/> The whenShow argument should be a variable. When that variable is true, the popup will show.
+<br/> The pauseOnShow argument, is if you want the game to pause on popup. It will use GameHandler's pause method
+<br/> Popups should be the last thing drawn
+
+    String[] message = {"Welcome to the best game", "ever!"};
+    boolean dialogPause = true;
+    gh.addCustomPopup(message, Color.black, Color.gray, color.darkGray, dialogPause, true, 100, 100, 100, 100);
+
+## draw3DRect(int x, int y, int w, int h, Color color)
+Add's a rectangular prism to the game screen.
+<br/> Not recommended for use, as it is still being implemented
+
+    gh.draw3DRect(100, 100, 50, 50, Color.RED);
+
+#Group GraphicsLoader
+All methods are from **GraphicsLoader.class**
+<br/> GraphicsLoader has to be **initialized** before used. **gl** is the variable used
+
+## loadGraphic(String path)
+Used to easily load graphics on variable initialization
+<br/> Returns Image
+
+    BufferedImage cowImage = (BufferedImage) gl.loadGraphic("Cow.png");
+    
+## setDefaultLoadingDirectory(String path)
+Used to set the default directory to load graphics with these methods
+
+    gl.setDefaultLoadingDirectory("/textures/");
+    
+#Group JVMRuntimeHandler
+All methods are from **JVMRuntimeHandler.class**
+<br/> JVMRuntimeHandler has to be **initialized** before used. **runtime** is the variable used
+
+## freeMem()
+Returns the free JVM memory.
+<br/> Returns Long
+
+    Debug.out(runtime.freeMem() + " MB", this.getClass());
+    
+## totalMem()
+Returns the total JVM memory
+<br/> Returns Long
+
+    Debug.out(runtime.totalMem() + " MB", this.getClass());
+    
+## maxMem()
+Returns the maximum JVM memory
+<br/> Returns Long
+
+    Debug.out(runtime.maxMem() + " MB, this.getClass());
+    
+## cleanup()
+If the free JVM memory is less than 30 MB, then the JVMRuntimeHandler will attempt to free up memory
+<br/> Recommended to be used in a loop or with GameHandler's Timer
+
+    public void run() {
+        runtime.cleanup();
+    }
+    
+## getProc()
+Returns the number of available processors
+<br/> Returns Integer
+
+    if (runtime.getProc() > 2) {
+        Log.out("All right!");
+    }
+    
+## exit()
+Exits a YGEApplication
+
+    yge.exit();
+    
+#Group KeyHandler
+All methods are from **KeyHandler.class**
+<br/> KeyHandler has to be **initialized** before used. **kh** is the variable used
+
+## KeyHandler(Thread thread)
+Constructor for KeyHandler. The thread parameter is used to check for key inputs as shown below
+
+    KeyHandler kh;
+    boolean esc;
+    Thread keyThread = new Thread() {
+        public void run() {
+            while (true) {
+                esc = kh.pressed[KeyEvent.VK_ESCAPE];
+                
+                if (esc) {
+                    yge.exit();
+                }
+            }
+        }
+    };
+    kh = new KeyHandler(thread);
+    frame.addKeyListener(kh);
+    
+The thread is automatically started by KeyHandler. This may be made easier to set up in the future
+
+## pressed[int]
+This is the variable used above for checking whether a key is down or not. It must be used as such
+                
+
+#Group Log
+All methods are from **Log.class**
+
+## out(String out)
+Outputs INFO message to log
+
+    Log.out("Starting Cow Simulator...");
+    
+## err(String out)
+Outputs ERROR message to log
+
+    Log.err("Could not load that file!");
+    
+## warn(String out)
+Outputs WARNING message to log
+
+    Log.warn("JVM Memory below 10 MB!!!");
+    
+## sev(String out)
+Outputs SEVERE message to log
+
+    Log.sev("Could not load necessary libraries!");
+    
+#Group Mathf
+All methods are from **Mathf.class**
+
+## length(int x, int y)
+Finds the absolute length between two points.
+<br/> Returns Integer
+
+    int line = Mathf.length(carPos, housePos);
+    
+## randNum(int max)
+Generates a random number from 0 - max number given
+<br/> Returns Integer
+
+    if (randNum(1000) == 998) {
+        Game.glitch();
+    }
+    
+## squareSA(int l)
+Returns the surface area of a square with a given length
+<br/> Returns Integer
+
+    return squareSA(User.input);
+    
+## squarePerim(int l)
+Returns the perimeter of a square with a given length
+<br/> Returns Integer
+
+    if (squarePerim(User.input)) {
+        min = true;
+    }
+    
+## rectSA(int l, int w)
+Returns the surface area of a rectangle with a given length, and width
+<br/> Returns Integer
+
+    int sa = rectSA(69, 52);
+    
+## rectPerim(int l, int w)]
+Returns the perimeter of a rectangle with a given length, and width
+<br/> Returns Integer
+
+    int perim = rectPerim(12, 99);
+    
+## circleSA(int r)
+Returns the surface area of a circle with a given radius
+<br/> Returns Float
+
+    float circle = circleSA(99);
+    
+## circleCirc(int r)
+Returns the circumference of a circle with a given radius
+<br/> Returns Float
+
+    float can = circleCirc(8);
+    
+## triSA(int b, int h)
+Returns the surface area of a triangle with given base and height
+<br/> Returns Float
+
+    float triangleSize = triSA(5, 7);
+    
+## triPerim(int a, int b, int c)
+Returns the perimiter of a triangle with given sides
+<br/> Returns Integer
+
+    int perimeter = triPerim(67, 78, 68);
+    
+#Group Sound
+All methods are from **Sound.class**
+<br/> Sound has to be **initialized** before used. **s** is the variable used
+
+## play(String url, boolean isBG)
+Plays a sound effect. Set isBG to true if it is background music.
+
+    if (weapon.x == enemy.x) {
+        s.play("squish.png", false);
+    }
+    
+## setDefaultLoadingDirectory(String path)
+Set the default directory for loading sounds with these methods
+
+    s.setDefaultLoadingDirectory("/audio/");
+
+## loopBG()
+Loop the background music when the song ends.
+<br/> Use this in a Thread or a GameHandler Timer
+
+    public void run() {
+        s.loopBG();
+    }
+    
+## setBGPaused(boolean paused)
+Set the background music to paused or unpaused
+<br/> Note: GameHandler pausing and resuming takes care of this for you
+
+    if (Game.paused) {
+        s.setBGPaused(true);
+    }
+    
+## getBGPaused()
+Get the paused state of the background music
+<br/> Returns Boolean
+
+    Debug.out("Background Music Paused: " + s.getBGPaused(), this.getClass());
+    
+#Group SystemUtil
+All methods are from **SystemUtil.class**
+<br/> SystemUtil has to be **initialized** before used. **util** is the variable used
+
+## getDate()
+Get the current system date
+<br/> Returns String
+
+    Log.out(util.getDate());
+    
+## getTime()
+Get the current system time
+<br/> Returns String
+
+    Log.out(util.getTime());
+    
+## getSysInfo()
+Get some system information, including user's name
+<br/> Returns String
+
+    Log.out("Printing System Info: " + util.getSysInfo());
+    
+## getYGEVersion()
+Returns the Yamanu Game Engine Verison
+<br/> Returns String
+
+    Debug.out(util.getYGEVersion(), this.getClass());
+    
+## getProcessor()
+Returns the name of your computers processor
+<br/> Returns String
+
+    Log.out("Processor: " + util.getProcessor());
+    
+## checkFiles()
+Loads the files for the use of certain features
+<br/> Recommended to be used before anything else
+
+    try {
+        util.checkFiles();
+    } catch (Exception e) {
+        Debug.pst(e);
+    }
+
+## speed()
+Returns the speed of your processor
+<br/> Returns String
+<br/> Note: On first load, it may take a few seconds
+
+    Log.out("Speed: " + util.speed());
+    
+#Group Window
+All methods are from **Window.class**
+
+## newFrame(String title, int w, int h, Component locRelTo, int closeOp)
+Constructor for making a new Window
+<br/> locRelTo is locationRelativeTo. Set to null to center window
+<br/> closeOp is the Closing Operation
+
+    Window frame = new Window();
+    frame.newFrame("Game 2" 1280, 720, null, Window.EXIT_ON_CLOSE);
+    
+## newFrame(String title, int w, int h, Component locRelTo, int closeOp, Component comp)
+This is the same as before, but if you're adding a component to the Window, this will also pack it and keep size correct
+
+    Window frame = new Window();
+    frame.newFrame("Game 2" 1280, 720, null, Window.EXIT_ON_CLOSE, game);
+    
+## Window(String title)
+This creates an empty Window with a title. The title argument can be removed for a completely empty window
+
+    Window frame = new Window("Empty Window");
+    
+## screenshot(Window frame)
+This takes a screenshot of the game! ***May not be working!***
+<br/> Be sure to set the save location **BEFORE** taking screenshots!
+
+    if (Keys.pressed("O")) {
+        screenshot(frame);
+    }
+    
+## setScreenshotSaveLocation(String path)
+This sets the save location for screenshots
+<br/> Do NOT use a slash at the end of the path!
+
+    Window.setScreenShotSaveLocation("C:/Users/John/Pictures/MyGame/ScreenShots");
+    
+## screenSize()
+This returns the computer screen size in Dimensions
+<br/> Returns Dimension
+
+    Dimension cpuScreen = Window.screenSize();
+    
+## fixResize()
+This will fix any setResizable(false); problems with a Window.
+
+    Window.fixResize(frame);
+    
+#Group YGE
+This is kind of an empty class. This contains the YGE Version, with protected access
+<br/> If you want the YGE Version, SystemUtil has a method for that
+<br/> If you want direct access to the YGE Version, make a class that extends YGE.
+
+#Group YGEApplication
+This is something that makes the main class for your game cleaner, and easier to use with Yamanu
+<br/> It contains many of the tools above alread in the class, so you won't need to import much of anything!
+<br/> To initialize, make your class extend YGEApplication, and initialize your own class. We will use yge right now
+
+## initTime(int time)
+Even greater simplifies GameHandler.initTimer(int time, ActionListener al)
+
+    yge.initTime(40);
+    
+## initGraphics(Graphics g, Component c)
+Should be used in the paintComponent method. Starts up GraphicsHandler
+    
+    protected void paintComponent(Graphics g) {
+        yge.initGraphics(g, frame);
+    }
+    
+## initKeyHandler(Thread thread, Component c)
+Does exactly what KeyHandler does, and automatically adds the KeyListener to your component
+
+    yge.initKeyHandler(keyThread, frame);
+    
+## initDefThread()
+Initializes a default KeyHandler thread, so when you press escape, the program exits
+
+    yge.initDefThread();
+    
+## start()
+Starts the Yamanu Application. Do this BEFORE EVERYTHING. This will ensure speedy loading times
+
+    public static void main(String[] args) {
+        start();
+    }
+    
+## exit()
+Correctly and quickly exits the YGEApplication
+
+    if (Player.dies()) {
+        exit();
+    } 
