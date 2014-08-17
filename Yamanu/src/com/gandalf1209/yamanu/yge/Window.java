@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -39,7 +40,11 @@ public class Window extends JFrame {
 		this.setSize(w, h);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(closeOp);
-		this.setIconImage(getIconImage());
+		try {
+			this.setIconImage(ImageIO.read(getClass().getResourceAsStream("/icons/Yamanu.png")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

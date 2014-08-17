@@ -15,6 +15,7 @@ import com.gandalf1209.yamanu.handlers.GameHandler;
 import com.gandalf1209.yamanu.handlers.JVMRuntimeHandler;
 import com.gandalf1209.yamanu.handlers.Sound;
 import com.gandalf1209.yamanu.input.KeyHandler;
+import com.gandalf1209.yamanu.physics.PhysicsHandler;
 import com.gandalf1209.yamanu.util.Debug;
 import com.gandalf1209.yamanu.util.SystemUtil;
 
@@ -29,6 +30,7 @@ public class YGEApplication extends JComponent implements ActionListener {
 	protected static GraphicsHandler graphics;
 	protected static GraphicsLoader graphicLoader = new GraphicsLoader();
 	protected static Sound sound = new Sound();
+	protected static PhysicsHandler physics;
 	protected static KeyHandler keyHandler;
 	
 	protected static Thread keyThread;
@@ -98,6 +100,7 @@ public class YGEApplication extends JComponent implements ActionListener {
 			public void run() {
 				try {
 					util.checkFiles();
+					physics = new PhysicsHandler();
 				} catch (Exception e) {
 					Debug.pst(e);
 				}

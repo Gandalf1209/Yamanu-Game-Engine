@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
+import com.gandalf1209.yamanu.game.GameObject;
 import com.gandalf1209.yamanu.handlers.GameHandler;
 import com.gandalf1209.yamanu.yge.Window;
 
@@ -144,6 +145,10 @@ public class GraphicsHandler extends Window {
 		g.drawLine(x + w, y + h, (x + w) + (w / 3), (y + h) - (h /3));
 		g.drawLine(x + (w / 3), y - (h / 3), x + (w / 3) + w, y - (h / 3));
 		g.drawLine(x + (w / 3) + w, y - (h / 3), x + (w / 3) + w, y - (h / 3) + h);
+	}
+	
+	public void addGameObject(GameObject obj) {
+		g.drawImage(obj.getImage(), obj.getX(), obj.getHeight(), obj.getWidth(), obj.getHeight(), null);
 	}
 	
 }

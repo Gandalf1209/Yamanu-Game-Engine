@@ -1,6 +1,8 @@
 package com.gandalf1209.yamanu.game;
 
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameObject {
 
@@ -13,6 +15,9 @@ public class GameObject {
 	private boolean smart;
 	private Image img;
 	
+	private static int count = 0;
+	private static List<GameObject> objects = new ArrayList<GameObject>();
+	
 	public GameObject(int x, int y, int w, int h, boolean canCollide, int friction, boolean smart) {
 		this.x = x;
 		this.y = y;
@@ -21,6 +26,9 @@ public class GameObject {
 		this.canCollide = canCollide;
 		this.friction = friction;
 		this.smart = smart;
+		
+		count++;
+		objects.add(this);
 	}
 
 	public int getX() {
@@ -55,7 +63,7 @@ public class GameObject {
 		this.h = h;
 	}
 
-	public boolean isCanCollide() {
+	public boolean canCollide() {
 		return canCollide;
 	}
 
@@ -85,6 +93,22 @@ public class GameObject {
 	
 	public Image getImage() {
 		return this.img;
+	}
+
+	public static int getCount() {
+		return count;
+	}
+
+	public static void setCount(int count) {
+		GameObject.count = count;
+	}
+
+	public static List<GameObject> getObjects() {
+		return objects;
+	}
+
+	public static void setObjects(List<GameObject> objects) {
+		GameObject.objects = objects;
 	}
 	
 }
