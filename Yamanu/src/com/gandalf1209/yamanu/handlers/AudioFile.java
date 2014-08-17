@@ -16,6 +16,7 @@ public class AudioFile {
 	
 	public Clip clip;
 	private boolean isBG = false;
+	private AudioInputStream ain;
 	
 	private static SystemUtil utils = new SystemUtil();
 	
@@ -27,6 +28,7 @@ public class AudioFile {
 			AudioFormat format = ain.getFormat();
 			DataLine.Info info = new DataLine.Info(Clip.class, format);
 			this.clip = (Clip) AudioSystem.getLine(info);
+			this.ain = ain;
 		} catch (Exception e) {
 			Log.err("Yamanu: " + e.getMessage());
 			Log.err("Yamanu Version: " + utils.getYGEVersion());
@@ -40,6 +42,10 @@ public class AudioFile {
 	
 	public boolean getBG() {
 		return this.isBG;
+	}
+	
+	public AudioInputStream getAIN() {
+		return this.ain;
 	}
 	
 }

@@ -8,7 +8,6 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineUnavailableException;
 
 import com.gandalf1209.yamanu.util.Log;
 import com.gandalf1209.yamanu.util.SystemUtil;
@@ -54,19 +53,21 @@ public class Sound {
 	
 	public void play(final AudioFile file) {
 		try {
-			file.clip.open();
+			file.clip.open(file.getAIN());
 			file.clip.start();
 			if (file.getBG()) {
 				Thread bgThread = new Thread("Background Music Thread") {
 					public void run() {
-						if (file.clip.getFramePosition() == file.clip.getFrameLength()) {
-							file.clip.setFramePosition(0);
+						while (file.clip.isActive()) {
+							if (file.clip.getFramePosition() == file.clip.getFrameLength()) {
+								file.clip.setFramePosition(0);
+							}
 						}
 					}
 				};
 				bgThread.start();
 			}
-		} catch (LineUnavailableException e) {
+		} catch (Exception e) {
 			Log.err("Yamanu: " + e.getMessage());
 			Log.err("Yamanu Version: " + util.getYGEVersion());
 			e.printStackTrace();
