@@ -1,4 +1,10 @@
 Yamanu-Game-Engine
 ==================
 
-Here you can view, download, or edit source code! I'm pretty sure you can do all of the branching and forking and stuff, but I may have accidentally put a password on it. Let me know on Twitter @gandalf1209 if you can't do anything.
+What is Yamanu Game Engine?
+
+  Yamanu Game Engine is a 2D Java Game Engine, meant mainly for Top-down views.
+  
+What does it have?
+
+  Yamanu has a Graphical, Audio, GUI, and Physics Engine. There are other things included, but you'll need to see them for  yourself!
