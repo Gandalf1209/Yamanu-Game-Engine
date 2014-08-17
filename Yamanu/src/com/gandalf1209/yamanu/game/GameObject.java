@@ -11,24 +11,44 @@ public class GameObject {
 	private int w;
 	private int h;
 	private boolean canCollide;
+	private int speed;
 	private int friction;
 	private boolean smart;
 	private Image img;
 	
+	private int originalSpeed;
+	
 	private static int count = 0;
 	private static List<GameObject> objects = new ArrayList<GameObject>();
 	
-	public GameObject(int x, int y, int w, int h, boolean canCollide, int friction, boolean smart) {
+	public GameObject(int x, int y, int w, int h, boolean canCollide, int speed, int friction, boolean smart) {
 		this.x = x;
 		this.y = y;
 		this.w = w;
 		this.h = h;
 		this.canCollide = canCollide;
+		this.speed = speed;
+		this.originalSpeed = speed;
 		this.friction = friction;
 		this.smart = smart;
 		
 		count++;
 		objects.add(this);
+	}
+	
+	public void move(int x, int y) {
+		if (x == 0) {
+			this.setX(this.getX() - this.speed);
+		}
+		if (x == 1) {
+			this.setX(this.getX() + this.speed);
+		}
+		if (y == 0) {
+			this.setY(this.getY() - this.speed);
+		}
+		if (y == 1) {
+			this.setY(this.getY() + this.speed);
+		}
 	}
 
 	public int getX() {
@@ -71,6 +91,14 @@ public class GameObject {
 		this.canCollide = canCollide;
 	}
 
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
 	public int getFriction() {
 		return friction;
 	}
@@ -109,6 +137,10 @@ public class GameObject {
 
 	public static void setObjects(List<GameObject> objects) {
 		GameObject.objects = objects;
+	}
+	
+	public int getOriginalSpeed() {
+		return this.originalSpeed;
 	}
 	
 }

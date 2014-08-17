@@ -22,13 +22,15 @@ public class PhysicsHandler {
 			GameObject current = GameObject.getObjects().get(i);
 			if (current.canCollide()) {
 				for (int j = 0; j < GameObject.getCount(); j++) {
-					GameObject target = GameObject.getObjects().get(i);
-					if (j != i) {
+					GameObject target = GameObject.getObjects().get(j);
+					if (i != j && target.canCollide() && current.canCollide()) {
 						if (current.getX() + current.getWidth() > target.getX() &&
 								current.getX() - current.getWidth() < target.getX() &&
 								current.getY() + current.getHeight() > target.getY() &&
 								current.getY() - current.getHeight() < target.getY()) {
-							System.out.println("Collision!");
+							current.setSpeed(current.getOriginalSpeed() - (target.getFriction() / 10));
+						} else {
+							current.setSpeed(current.getOriginalSpeed());
 						}
 					}
 				}
