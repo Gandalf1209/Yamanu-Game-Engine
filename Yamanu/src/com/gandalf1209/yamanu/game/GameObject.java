@@ -17,6 +17,8 @@ public class GameObject {
 	private Image img;
 	
 	private int originalSpeed;
+	private int xDir = 0;
+	private int yDir = 0;
 	
 	private static int count = 0;
 	private static List<GameObject> objects = new ArrayList<GameObject>();
@@ -37,17 +39,42 @@ public class GameObject {
 	}
 	
 	public void move(int x, int y) {
+		if (x == -1) {
+			this.setX(this.getX() - this.speed);
+			this.xDir = -1;
+		}
 		if (x == 0) {
+			this.xDir = 0;
+		}
+		if (x == 1) {
+			this.setX(this.getX() + this.speed);
+			this.xDir = 1;
+		}
+		if (y == -1) {
+			this.setY(this.getY() + this.speed);
+			this.yDir = -1;
+		}
+		if (y == 0) {
+			this.yDir = 0;
+		}
+		if (y == 1) {
+			this.setY(this.getY() - this.speed);
+			this.yDir = 1;
+		}
+	}
+	
+	public void move(int x, int y, boolean isPushed) {
+		if (x == -1) {
 			this.setX(this.getX() - this.speed);
 		}
 		if (x == 1) {
 			this.setX(this.getX() + this.speed);
 		}
-		if (y == 0) {
-			this.setY(this.getY() - this.speed);
+		if (y == -1) {
+			this.setY(this.getY() + this.speed);
 		}
 		if (y == 1) {
-			this.setY(this.getY() + this.speed);
+			this.setY(this.getY() - this.speed);
 		}
 	}
 
@@ -139,8 +166,36 @@ public class GameObject {
 		GameObject.objects = objects;
 	}
 	
+	public int getXDir() {
+		return xDir;
+	}
+
+	public void setXDir(int xDir) {
+		this.xDir = xDir;
+	}
+
+	public int getYDir() {
+		return yDir;
+	}
+
+	public void getYDir(int yDir) {
+		this.yDir = yDir;
+	}
+
 	public int getOriginalSpeed() {
 		return this.originalSpeed;
+	}
+	
+	public void destroy() {
+		x = 0;
+		y = 0;
+		w = 0;
+		y = 0;
+		canCollide = false;
+		speed = 0;
+		friction = 0;
+		smart = false;
+		img = null;
 	}
 	
 }
