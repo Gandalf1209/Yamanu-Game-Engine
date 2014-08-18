@@ -5,6 +5,7 @@ import com.gandalf1209.yamanu.game.GameObject;
 public class PhysicsHandler {
 
 	public Thread pThread;
+	private int gravity = 10;
 	
 	public PhysicsHandler() {
 		pThread = new Thread("Physics Handler Thread") {
@@ -17,7 +18,7 @@ public class PhysicsHandler {
 		pThread.start();
 	}
 	
-	private static void runPhysics() {
+	private void runPhysics() {
 		for (int i = 0; i < GameObject.getCount(); i++) {
 			GameObject current = null;
 			if (GameObject.getObjects().get(i).isSmart()) {
@@ -35,7 +36,7 @@ public class PhysicsHandler {
 									&& current.getX() - current.getWidth() < target.getX()
 									&& current.getY() + current.getHeight() > target.getY()
 									&& current.getY() - current.getHeight() < target.getY()) {
-								current.setSpeed(current.getOriginalSpeed() - (target.getFriction() / 10));
+								current.setSpeed(current.getOriginalSpeed() - (target.getFriction() / getGravity()));
 								target.setSpeed(current.getSpeed());
 								target.move(current.getXDir(), current.getYDir(), true);
 							}
@@ -47,6 +48,14 @@ public class PhysicsHandler {
 				}
 			}
 		}
+	}
+	
+	public int getGravity() {
+		return this.gravity;
+	}
+	
+	public void setGravity(int gravity) {
+		this.gravity = gravity;
 	}
 	
 }
