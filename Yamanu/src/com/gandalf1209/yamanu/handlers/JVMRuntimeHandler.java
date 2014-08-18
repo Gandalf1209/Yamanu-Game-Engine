@@ -14,6 +14,8 @@ public class JVMRuntimeHandler {
 	
 	private static Thread exit;
 	private static SystemUtil util = new SystemUtil();
+	
+	private int threadCount;
 
 	/**
 	 * Returns free JVM Memory
@@ -93,6 +95,22 @@ public class JVMRuntimeHandler {
 				thread.interrupt();
 			}
 		}
+	}
+	
+	public void getThreads() throws InterruptedException {
+		Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
+		Thread[] threads = threadSet.toArray(new Thread[threadSet.size()]);
+		int threadCount = 0;
+		for (Thread thread : threads) {
+			if (!thread.isDaemon()) {
+				threadCount++;
+			}
+		}
+		this.threadCount = threadCount;
+	}
+	
+	public int getThreadCount() {
+		return threadCount;
 	}
 	
 }

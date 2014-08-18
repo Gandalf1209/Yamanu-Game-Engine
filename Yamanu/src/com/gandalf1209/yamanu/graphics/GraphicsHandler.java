@@ -20,6 +20,8 @@ public class GraphicsHandler extends Window {
 	private GraphicsLoader gl;
 	private GameHandler gh;
 	
+	private static int lCount = 0;
+	
 	/**
 	 * Initialize the class, and set where to draw the graphics
 	 * @param g Graphics (paintComponent(), paint())
@@ -59,6 +61,7 @@ public class GraphicsHandler extends Window {
 	public void addLight(int x, int y, int intense) {
 		BufferedImage light = (BufferedImage) gl.loadGraphic("light.png");
 		g.drawImage(light, x, y, intense, intense, null);
+		lCount++;
 	}
 	
 	/**
@@ -149,6 +152,14 @@ public class GraphicsHandler extends Window {
 	
 	public void addGameObject(GameObject obj) {
 		g.drawImage(obj.getImage(), obj.getX(), obj.getHeight(), obj.getWidth(), obj.getHeight(), null);
+	}
+
+	public static int getlCount() {
+		return lCount;
+	}
+
+	public static void setlCount(int lCount) {
+		GraphicsHandler.lCount = lCount;
 	}
 	
 }
