@@ -37,10 +37,11 @@ public class PhysicsHandler {
 									&& current.getY() - current.getHeight() < target.getY()) {
 								current.setSpeed(current.getOriginalSpeed() - (target.getFriction() / 10));
 								target.setSpeed(current.getSpeed());
-								target.move(current.getXDir(), current.getYDir());
-							} else {
-								current.setSpeed(current.getOriginalSpeed());
+								target.move(current.getXDir(), current.getYDir(), true);
 							}
+						}
+						if (current.getXDir() == 0 && current.getYDir() == 0) {
+							current.setSpeed(current.getOriginalSpeed());
 						}
 					}
 				}

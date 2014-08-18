@@ -40,41 +40,51 @@ public class GameObject {
 	
 	public void move(int x, int y) {
 		if (x == -1) {
-			this.setX(this.getX() - this.speed);
+			this.setX(this.getX() - this.getSpeed());
 			this.xDir = -1;
 		}
 		if (x == 0) {
 			this.xDir = 0;
 		}
 		if (x == 1) {
-			this.setX(this.getX() + this.speed);
+			this.setX(this.getX() + this.getSpeed());
 			this.xDir = 1;
 		}
 		if (y == -1) {
-			this.setY(this.getY() + this.speed);
+			this.setY(this.getY() + this.getSpeed());
 			this.yDir = -1;
 		}
 		if (y == 0) {
 			this.yDir = 0;
 		}
 		if (y == 1) {
-			this.setY(this.getY() - this.speed);
+			this.setY(this.getY() - this.getSpeed());
 			this.yDir = 1;
 		}
 	}
 	
 	public void move(int x, int y, boolean isPushed) {
 		if (x == -1) {
-			this.setX(this.getX() - this.speed);
+			this.setX(this.getX() - this.getSpeed());
+			this.xDir = -1;
+		}
+		if (x == 0) {
+			this.xDir = 0;
 		}
 		if (x == 1) {
-			this.setX(this.getX() + this.speed);
+			this.setX(this.getX() + this.getSpeed());
+			this.xDir = 1;
 		}
 		if (y == -1) {
-			this.setY(this.getY() + this.speed);
+			this.setY(this.getY() + this.getSpeed());
+			this.yDir = -1;
+		}
+		if (y == 0) {
+			this.yDir = 0;
 		}
 		if (y == 1) {
-			this.setY(this.getY() - this.speed);
+			this.setY(this.getY() - this.getSpeed());
+			this.yDir = 1;
 		}
 	}
 
