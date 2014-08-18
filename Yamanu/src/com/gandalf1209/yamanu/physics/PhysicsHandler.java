@@ -27,15 +27,20 @@ public class PhysicsHandler {
 				for (int j = 0; j < GameObject.getCount(); j++) {
 					GameObject target = GameObject.getObjects().get(j);
 					if (i != j && target.canCollide() && current.canCollide()) {
-						if (current.getX() + current.getWidth() > target.getX()
-								&& current.getX() - current.getWidth() < target.getX()
-								&& current.getY() + current.getHeight() > target.getY()
-								&& current.getY() - current.getHeight() < target.getY()) {
-							current.setSpeed(current.getOriginalSpeed() - (target.getFriction() / 10));
-							target.setSpeed(current.getSpeed());
-							target.move(current.getXDir(), current.getYDir());
-						} else {
-							current.setSpeed(current.getOriginalSpeed());
+						if ((current.getX() - 1) + current.getWidth() > target.getX()
+								&& (current.getX() + 1) - current.getWidth() < target.getX()
+								&& (current.getY() - 1) + current.getHeight() > target.getY()
+								&& (current.getY() + 1) - current.getHeight() < target.getY()) {
+							if (current.getX() + current.getWidth() > target.getX()
+									&& current.getX() - current.getWidth() < target.getX()
+									&& current.getY() + current.getHeight() > target.getY()
+									&& current.getY() - current.getHeight() < target.getY()) {
+								current.setSpeed(current.getOriginalSpeed() - (target.getFriction() / 10));
+								target.setSpeed(current.getSpeed());
+								target.move(current.getXDir(), current.getYDir());
+							} else {
+								current.setSpeed(current.getOriginalSpeed());
+							}
 						}
 					}
 				}
