@@ -19,34 +19,38 @@ public class PhysicsHandler {
 	}
 	
 	private void runPhysics() {
-		for (int i = 0; i < GameObject.getCount(); i++) {
-			GameObject current = null;
-			if (GameObject.getObjects().get(i).isSmart()) {
-				current = GameObject.getObjects().get(i);
-			}
-			if (current != null) {
-				for (int j = 0; j < GameObject.getCount(); j++) {
-					GameObject target = GameObject.getObjects().get(j);
-					if (i != j && target.canCollide() && current.canCollide()) {
-						if ((current.getX() - 1) + current.getWidth() > target.getX()
-								&& (current.getX() + 1) - current.getWidth() < target.getX()
-								&& (current.getY() - 1) + current.getHeight() > target.getY()
-								&& (current.getY() + 1) - current.getHeight() < target.getY()) {
-							if (current.getX() + current.getWidth() > target.getX()
-									&& current.getX() - current.getWidth() < target.getX()
-									&& current.getY() + current.getHeight() > target.getY()
-									&& current.getY() - current.getHeight() < target.getY()) {
-								current.setSpeed(current.getOriginalSpeed() - (target.getFriction() / getGravity()));
-								target.setSpeed(current.getSpeed());
-								target.move(current.getXDir(), current.getYDir(), true);
+		try {
+			for (int i = 0; i < GameObject.getCount(); i++) {
+				GameObject current = null;
+				if (GameObject.getObjects().get(i).isSmart()) {
+					current = GameObject.getObjects().get(i);
+				}
+				if (current != null) {
+					for (int j = 0; j < GameObject.getCount(); j++) {
+						GameObject target = GameObject.getObjects().get(j);
+						if (i != j && target.canCollide() && current.canCollide()) {
+							if ((current.getX() - 1) + current.getWidth() > target.getX()
+									&& (current.getX() + 1) - current.getWidth() < target.getX()
+									&& (current.getY() - 1) + current.getHeight() > target.getY()
+									&& (current.getY() + 1) - current.getHeight() < target.getY()) {
+								if (current.getX() + current.getWidth() > target.getX()
+										&& current.getX() - current.getWidth() < target.getX()
+										&& current.getY() + current.getHeight() > target.getY()
+										&& current.getY() - current.getHeight() < target.getY()) {
+									current.setSpeed(current.getOriginalSpeed() - (target.getFriction() / getGravity()));
+									target.setSpeed(current.getSpeed());
+									target.move(current.getXDir(), current.getYDir(), true);
+								}
 							}
-						}
-						if (current.getXDir() == 0 && current.getYDir() == 0) {
-							current.setSpeed(current.getOriginalSpeed());
+							if (current.getXDir() == 0 && current.getYDir() == 0) {
+								current.setSpeed(current.getOriginalSpeed());
+							}
 						}
 					}
 				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
