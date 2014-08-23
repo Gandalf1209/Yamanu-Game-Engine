@@ -22,7 +22,7 @@ public class Sound {
 	private Clip bg;
 	private String defDir = "";
 	
-	private SystemUtil util;
+	private SystemUtil util = new SystemUtil();
 
 	/**
 	 * Plays the audio file specified in the 'url' parameter. If the
