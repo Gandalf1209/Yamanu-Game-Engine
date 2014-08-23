@@ -1,6 +1,7 @@
 package com.gandalf1209.yamanu.physics;
 
 import com.gandalf1209.yamanu.game.GameObject;
+import com.gandalf1209.yamanu.util.Debug;
 
 public class PhysicsHandler {
 
@@ -50,7 +51,7 @@ public class PhysicsHandler {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Debug.pst(e);
 		}
 	}
 	
