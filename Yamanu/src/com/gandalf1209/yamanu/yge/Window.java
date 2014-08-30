@@ -35,7 +35,7 @@ public class Window extends JFrame {
 	 * @param closeOp Close Operation
 	 * @return Window
 	 */
-	public void newFrame(String title, int w, int h, Component locRelTo, int closeOp) {
+	public void newFrame(String title, int w, int h, int closeOp) {
 		this.setTitle(title);
 		this.setSize(w, h);
 		this.setLocationRelativeTo(null);
@@ -58,7 +58,7 @@ public class Window extends JFrame {
 	 * @param comp To add a component on the fly!
 	 * @return Window
 	 */
-	public void newFrame(String title, int w, int h, Component locRelTo, int closeOp, Component comp) {
+	public void newFrame(String title, int w, int h, int closeOp, Component comp) {
 		this.setTitle(title);
 		this.add(comp);
 		this.pack();
