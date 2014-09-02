@@ -41,7 +41,7 @@ public class Window extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(closeOp);
 		try {
-			this.setIconImage(ImageIO.read(getClass().getResourceAsStream("/icons/Yamanu.png")));
+			this.setIconImage(ImageIO.read(getClass().getResourceAsStream("/icons/Icon.jpg")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -65,6 +65,11 @@ public class Window extends JFrame {
 		this.setSize(w, h);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(closeOp);
+		try {
+			this.setIconImage(ImageIO.read(getClass().getResourceAsStream("/icons/Icon.jpg")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
