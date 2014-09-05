@@ -35,11 +35,11 @@ public class Window extends JFrame {
 	 * @param closeOp Close Operation
 	 * @return Window
 	 */
-	public void newFrame(String title, int w, int h, int closeOp) {
+	public void newFrame(String title, int w, int h) {
 		this.setTitle(title);
 		this.setSize(w, h);
 		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(closeOp);
+		this.setDefaultCloseOperation(Window.EXIT_ON_CLOSE);
 		try {
 			this.setIconImage(ImageIO.read(getClass().getResourceAsStream("/icons/Icon.jpg")));
 		} catch (IOException e) {
@@ -58,13 +58,13 @@ public class Window extends JFrame {
 	 * @param comp To add a component on the fly!
 	 * @return Window
 	 */
-	public void newFrame(String title, int w, int h, int closeOp, Component comp) {
-		this.setTitle(title);
+	public void newFrame(String title, int w, int h, Component comp) {
+		this.setName(title);
 		this.add(comp);
 		this.pack();
 		this.setSize(w, h);
 		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(closeOp);
+		this.setDefaultCloseOperation(Window.EXIT_ON_CLOSE);
 		try {
 			this.setIconImage(ImageIO.read(getClass().getResourceAsStream("/icons/Icon.jpg")));
 		} catch (IOException e) {
@@ -79,10 +79,6 @@ public class Window extends JFrame {
 		
 	}
 	
-	/**
-	 * Makes a simple window
-	 * @param title String
-	 */
 	public Window(String title) {
 		super(title);
 	}
@@ -127,7 +123,5 @@ public class Window extends JFrame {
 			frame.setSize(frame.getWidth() + 10, frame.getHeight() + 10);
 		}
 	}
-	
-	
 	
 }
