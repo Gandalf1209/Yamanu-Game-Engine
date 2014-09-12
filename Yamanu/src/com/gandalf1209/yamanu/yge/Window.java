@@ -59,7 +59,7 @@ public class Window extends JFrame {
 	 * @return Window
 	 */
 	public void newFrame(String title, int w, int h, Component comp) {
-		this.setName(title);
+		this.setTitle(title);
 		this.add(comp);
 		this.pack();
 		this.setSize(w, h);
