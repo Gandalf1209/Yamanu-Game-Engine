@@ -136,11 +136,8 @@ public class GraphicsHandler extends Window {
 	 * @param y Pos Y
 	 * @param w Width
 	 * @param h Height
-	 * @param color Color
 	 */
-	public void draw3DRect(int x, int y, int w, int h, Color color) {
-		g.setColor(color);
-		g.fillRect(x, y, w, h);
+	public void draw3DRect(int x, int y, int w, int h) {
 		g.setColor(Color.black);
 		g.drawRect(x, y, w, h);
 		g.drawLine(x, y, x + (w / 3), y - (h / 3));
@@ -148,6 +145,12 @@ public class GraphicsHandler extends Window {
 		g.drawLine(x + w, y + h, (x + w) + (w / 3), (y + h) - (h /3));
 		g.drawLine(x + (w / 3), y - (h / 3), x + (w / 3) + w, y - (h / 3));
 		g.drawLine(x + (w / 3) + w, y - (h / 3), x + (w / 3) + w, y - (h / 3) + h);
+	}
+	
+	public void drawTriangle(int x, int y, int b, int h) {
+		g.drawLine(x, y, x + b, y);
+		g.drawLine(x, y, x + (b / 2), y - h);
+		g.drawLine(x + b, y, x + (b / 2), y - h);
 	}
 	
 	public void addGameObject(GameObject obj) {

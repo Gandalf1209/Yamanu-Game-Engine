@@ -24,9 +24,9 @@ public class Window extends JFrame {
 	
 	private static SystemUtil su = new SystemUtil();
 	private static String ssPath;
-
+	
 	/**
-	 * Makes a new window with the required parameters to have it
+	 * Constructor for a new window with the required parameters to have it
 	 * appear and function on screen.
 	 * @param title Window Title
 	 * @param w Width
@@ -35,7 +35,7 @@ public class Window extends JFrame {
 	 * @param closeOp Close Operation
 	 * @return Window
 	 */
-	public void newFrame(String title, int w, int h) {
+	public Window(String title, int w, int h) {
 		this.setTitle(title);
 		this.setSize(w, h);
 		this.setLocationRelativeTo(null);
@@ -48,7 +48,7 @@ public class Window extends JFrame {
 	}
 	
 	/**
-	 * Makes a new window with the required parameters to have it
+	 * Constructor for a new window with the required parameters to have it
 	 * appear and function on screen.
 	 * @param title Window Title
 	 * @param w Width
@@ -58,7 +58,7 @@ public class Window extends JFrame {
 	 * @param comp To add a component on the fly!
 	 * @return Window
 	 */
-	public void newFrame(String title, int w, int h, Component comp) {
+	public Window(String title, int w, int h, Component comp) {
 		this.setTitle(title);
 		this.add(comp);
 		this.pack();
@@ -77,10 +77,6 @@ public class Window extends JFrame {
 	 */
 	public Window() {
 		
-	}
-	
-	public Window(String title) {
-		super(title);
 	}
 	
 	/**
